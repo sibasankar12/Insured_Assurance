@@ -24,10 +24,10 @@ jobs:
       - name: Trigger Jenkins Job
         uses: HoldenLucas/build-jenkins-job@v0.1
         with:
-          url: ${{ secrets.JENKINS_URL }}              
-          token: ${{ secrets.JENKINS_TOKEN }}
-          user: ${{ secrets.JENKINS_USER }}
-          job: "Test_Githubaction_Job"
+         job_url: ${{ secrets.JENKINS_JOB_URL }}           # Full URL to the Jenkins job (e.g., http://<jenkins-ip>:8080/job/DeployTomcat)
+         jenkins_token: ${{ secrets.JENKINS_TOKEN }}
+         jenkins_user: ${{ secrets.JENKINS_USER }}
+         job: "Test_Githubaction_Job"
 
      # Optional: Upload WAR via SCP to remote Jenkins/Tomcat server
       - name: Upload WAR to remote server
@@ -39,4 +39,3 @@ jobs:
           port: ${{ secrets.PORT }}
           source: "target/*.war"
           target: "/home/jenkins/deploy-folder/"
-
