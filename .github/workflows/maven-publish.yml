@@ -22,19 +22,19 @@ jobs:
         run: mvn clean package
 
       - name: Trigger Jenkins Job
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/jenkins-action@v0.0.1
         with:
-         job_url: ${{ secrets.JENKINS_JOB_URL }}           # Full URL to the Jenkins job (e.g., http://<jenkins-ip>:8080/job/DeployTomcat)
-         jenkins_token: ${{ secrets.JENKINS_TOKEN }}
-         jenkins_user: ${{ secrets.JENKINS_USER }}
+          url: ${{ secrets.JENKINS_JOB_URL }}           # Full URL to the Jenkins job (e.g., http://<jenkins-ip>:8080/job/DeployTomcat)
+          token: ${{ secrets.JENKINS_TOKEN }}
+          user: ${{ secrets.JENKINS_USER }}
 
-     # Optional: Upload WAR via SCP to remote Jenkins/Tomcat server
+      # Optional: Upload WAR via SCP to remote Jenkins/Tomcat server
       - name: Upload WAR to remote server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          pass: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "target/*.war"
           target: "/home/jenkins/deploy-folder/"
