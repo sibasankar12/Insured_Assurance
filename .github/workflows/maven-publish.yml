@@ -27,7 +27,6 @@ jobs:
          job_url: ${{ secrets.JENKINS_JOB_URL }}           # Full URL to the Jenkins job (e.g., http://<jenkins-ip>:8080/job/DeployTomcat)
          jenkins_token: ${{ secrets.JENKINS_TOKEN }}
          jenkins_user: ${{ secrets.JENKINS_USER }}
-         job: "Test_Githubaction_Job"
 
      # Optional: Upload WAR via SCP to remote Jenkins/Tomcat server
       - name: Upload WAR to remote server
