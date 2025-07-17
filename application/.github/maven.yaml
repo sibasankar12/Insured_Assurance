@@ -1,0 +1,32 @@
+name: Maven Build and SSH Deploy
+
+on:
+  push:
+    branches:
+      - main  # Change this to your branch if needed
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'  # Change if using a different version
+
+    - name: Build with Maven
+      run: mvn clean package
+
+    - name: Deploy via SSH
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "target/calculator-0.0.1-SNAPSHOT.jar"        # Adjust based on artifact name/type
+        target: "/home/deploy/apps/"  # Change this to your desired target path
