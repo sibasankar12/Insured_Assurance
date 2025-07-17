@@ -22,7 +22,7 @@ jobs:
         run: mvn clean package
 
       - name: Trigger Jenkins Job
-        uses: HoldenLucas/build-jenkins-job@v0.1
+        uses: appleboy/scp-action@v0.1.7
         with:
          job_url: ${{ secrets.JENKINS_JOB_URL }}           # Full URL to the Jenkins job (e.g., http://<jenkins-ip>:8080/job/DeployTomcat)
          jenkins_token: ${{ secrets.JENKINS_TOKEN }}
