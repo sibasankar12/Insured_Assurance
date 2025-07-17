@@ -1,0 +1,42 @@
+name: Maven Package and Jenkins Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Build WAR with Maven
+        run: mvn clean package
+
+      - name: Trigger Jenkins Job
+        uses: HoldenLucas/build-jenkins-job@v0.1
+        with:
+          url: ${{ secrets.JENKINS_URL }}              
+          token: ${{ secrets.JENKINS_TOKEN }}
+          user: ${{ secrets.JENKINS_USER }}
+          job: "Test_Githubaction_Job"
+
+     # Optional: Upload WAR via SCP to remote Jenkins/Tomcat server
+      - name: Upload WAR to remote server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          pass: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "target/*.war"
+          target: "/home/jenkins/deploy-folder/"
+
