@@ -24,10 +24,10 @@ jobs:
       - name: Trigger Jenkins Job
         uses: appleboy/jenkins-action@v1.1.1
         with:
-          jenkins_url: ${{ secrets.JENKINS_URL }}               # e.g. http://<jenkins-ip>:8080
-          job_name: ${{ secrets.JENKINS_JOB_NAME }}             # e.g. DeployTomcat
+          url: ${{ secrets.JENKINS_URL }}               # e.g. http://<jenkins-ip>:8080
+          job: ${{ secrets.JENKINS_JOB_NAME }}             # e.g. DeployTomcat
           user: ${{ secrets.JENKINS_USER }}
-          api_token: ${{ secrets.JENKINS_API_TOKEN }}
+          token: ${{ secrets.JENKINS_API_TOKEN }}
 
       # Optional: Upload WAR via SCP to remote Jenkins/Tomcat server
       - name: Upload WAR to remote server
