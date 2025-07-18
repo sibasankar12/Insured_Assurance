@@ -22,11 +22,12 @@ jobs:
         run: mvn clean package
 
       - name: Trigger Jenkins Job
-        uses: appleboy/jenkins-action@v0.0.1
+        uses: peter-evans/trigger-jenkins-job@v3
         with:
-          url: ${{ secrets.JENKINS_JOB_URL }}           # Full URL to the Jenkins job (e.g., http://<jenkins-ip>:8080/job/DeployTomcat)
-          token: ${{ secrets.JENKINS_TOKEN }}
+          jenkins_url: ${{ secrets.JENKINS_URL }}               # e.g. http://<jenkins-ip>:8080
+          job_name: ${{ secrets.JENKINS_JOB_NAME }}             # e.g. DeployTomcat
           user: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_API_TOKEN }}
 
       # Optional: Upload WAR via SCP to remote Jenkins/Tomcat server
       - name: Upload WAR to remote server
