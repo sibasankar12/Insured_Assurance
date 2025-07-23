@@ -41,4 +41,4 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           source: "target/*.war"
-          target: "/home/jenkins/deploy-folder/"
+          target: "/home/ec2-user/tomcat9/webapps/"
