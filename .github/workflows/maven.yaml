@@ -38,7 +38,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           source: "target/*.war"
           target: "/home/jenkins/deploy-folder/"
